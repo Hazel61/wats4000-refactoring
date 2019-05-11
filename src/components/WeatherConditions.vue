@@ -2,12 +2,12 @@
   <div>
     <dl>
       <dt v-if="conditions.temp != conditions.temp_min">Current Temperature</dt>
-      <dd v-if="conditions.temp != conditions.temp_min">{{ conditions.temp }}%</dd>
-      <dt>Humidity</dt>
+      <dd v-if="conditions.temp != conditions.temp_min">{{ conditions.temp }}</dd>
+      <dt>Humidity </dt>
       <dd>{{ conditions.humidity }}%</dd>
-      <dt>High</dt>
+      <dt>High </dt>
       <dd>{{ conditions.temp_max }}&deg;F</dd>
-      <dt>Low</dt>
+      <dt>Low </dt>
       <dd>{{ conditions.temp_min }}&deg;F</dd>
     </dl>
   </div>
@@ -35,7 +35,7 @@ export default {
   dt {
     float: left;
     clear: left;
-    width: 120px;
+    width: 130px;
     text-align: right;
     font-weight: bold;
     color: blue;

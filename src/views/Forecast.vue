@@ -5,25 +5,17 @@
       <router-link to="/">Home</router-link> |
       <router-link v-bind:to="{ name: 'CurrentWeather', params: { cityId: $route.params.cityId } }">Current Weather <span v-if="weatherData"> for {{ weatherData.city.name }}, {{weatherData.city.country }}</span></router-link>
     </p>
-
     <ul v-if="weatherData && errors.length===0" class="forecast">
       <li v-for="(forecast,index) in weatherData.list" :key="index">
         <h3>{{ forecast.dt|formatDate }}</h3>
-        <!-- TODO: Make weather summary be in a child component. -->
         <weather-summary v-bind:weatherData="forecast.weather"></weather-summary>
-        <!-- TODO: Make dl of weather data be in a child component. -->
         <weather-conditions v-bind:conditions="forecast.main"></weather-conditions>
       </li>
     </ul>
-    <div v-else-if="errors.length > 0">
-      <h2>There was an error fetching weather data.</h2>
-      <ul class="errors">
-        <li v-for="(error,index) in errors" :key="index">{{ error }}</li>
-      </ul>
-    </div>
     <div v-else>
       <h2>Loading...</h2>
     </div>
+    <error-list v-bind:errorList="errors"></error-list>
   </div>
 </template>
 
@@ -32,6 +24,7 @@ import axios from 'axios';
 import {API} from '@/common/api';
 import WeatherSummary from '@/components/WeatherSummary';
 import WeatherConditions from '@/components/WeatherConditions';
+import ErrorList from '@/components/ErrorList';
 
 export default {
   name: 'Forecast',
@@ -82,6 +75,7 @@ export default {
    components: {
     'weather-summary': WeatherSummary,
     'weather-conditions': WeatherConditions,
+    'error-list': ErrorList,
   }
 }
 </script>
