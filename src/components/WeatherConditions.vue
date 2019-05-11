@@ -35,13 +35,14 @@ export default {
   dt {
     float: left;
     clear: left;
-    width: 130px;
+    width: 180px;
     text-align: right;
     font-weight: bold;
     color: blue;
+    padding: 5px;
   }
   dd {
-    margin: 0 0 0 130px;
+    margin-top: 5px;
     padding: 0 0 0.5em 0;
   }
   dt::after {
