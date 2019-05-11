@@ -8,24 +8,8 @@
         <li v-for="(city,index) in results.list" :key="index">
             <h2>{{ city.name }}, {{ city.sys.country }}</h2>
             <p><router-link v-bind:to="{ name: 'CurrentWeather', params: { cityId: city.id } }">View Current Weather</router-link></p>
-
-            <!-- TODO: Make weather summary be in a child component. -->
-            <div v-for="(weatherSummary,index) in city.weather" class="weatherSummary" :key="index">
-                <img v-bind:src="'http://openweathermap.org/img/w/' + weatherSummary.icon + '.png'" v-bind:alt="weatherSummary.main">
-                <br>
-                <b>{{ weatherSummary.main }}</b>
-            </div>
-            <!-- TODO: Make dl of weather data be in a child component. -->
-            <dl>
-                <dt>Current Temp</dt>
-                <dd>{{ city.main.temp }}&deg;F</dd>
-                <dt>Humidity</dt>
-                <dd>{{ city.main.humidity }}%</dd>
-                <dt>High</dt>
-                <dd>{{ city.main.temp_max }}&deg;F</dd>
-                <dt>Low</dt>
-                <dd>{{ city.main.temp_min }}&deg;F</dd>
-            </dl>
+            <weather-summary v-bind:weatherData="city.weather"></weather-summary>
+            <weather-conditions v-bind:conditions="city.main"></weather-conditions>
         </li>
     </ul>
     <div v-else-if="errors.length > 0">
@@ -40,7 +24,8 @@
 <script>
 import axios from 'axios';
 import {API} from '@/common/api';
-
+import WeatherSummary from '@/components/WeatherSummary';
+import WeatherConditions from '@/components/WeatherConditions';
 export default {
   name: 'CitySearch',
   data () {
@@ -52,7 +37,6 @@ export default {
   },
   methods: {
     getCities: function () {
-      // TODO: Improve base config for API
       API.get('find', {
         params: {
             q: this.query
@@ -65,6 +49,10 @@ export default {
         this.errors.push(error)
       });
     }
+  },
+   components: {
+    'weather-summary': WeatherSummary,
+    'weather-conditions': WeatherConditions,
   }
 }
 </script>
@@ -79,7 +67,6 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -96,26 +83,6 @@ li {
   display: inline-block;
   width: 100px;
 }
-dl {
-  padding: 5px;
-  background: #e8e8e8;
-}
-dt {
-  float: left;
-  clear: left;
-  width: 120px;
-  text-align: right;
-  font-weight: bold;
-  color: blue;
-}
-dd {
-  margin: 0 0 0 130px;
-  padding: 0 0 0.5em 0;
-}
-dt::after {
-  content: ":";
-}
-
 a {
   color: #42b983;
 }
