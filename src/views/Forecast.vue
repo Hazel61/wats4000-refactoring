@@ -12,9 +12,6 @@
         <weather-conditions v-bind:conditions="forecast.main"></weather-conditions>
       </li>
     </ul>
-    <div v-else>
-      <h2>Loading...</h2>
-    </div>
     <error-list v-bind:errorList="errors"></error-list>
   </div>
 </template>
@@ -57,7 +54,6 @@ export default {
       //let weekday = date.getDay();
       let daynum = date.getDate();
       let month = date.getMonth();
-
       let hour = date.getHours();
       if (hour === 12) {
         hour = 'Noon';
@@ -72,10 +68,10 @@ export default {
       return `${ months[month] } ${ daynum } @ ${ hour }`;
     }
   },
-   components: {
+  components: {
     'weather-summary': WeatherSummary,
     'weather-conditions': WeatherConditions,
-    'error-list': ErrorList,
+    'error-list': ErrorList
   }
 }
 </script>
@@ -111,7 +107,6 @@ a {
   display: inline-block;
   width: 100px;
 }
-
 </style>
 
 

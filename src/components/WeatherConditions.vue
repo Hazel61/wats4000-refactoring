@@ -1,8 +1,8 @@
 <template>
   <div>
     <dl>
-      <dt v-if="conditions.temp != conditions.temp_min">Current Temperature</dt>
-      <dd v-if="conditions.temp != conditions.temp_min">{{ conditions.temp }}</dd>
+      <dt>Current Temp</dt>
+      <dd>{{ conditions.temp }}</dd>
       <dt>Humidity </dt>
       <dd>{{ conditions.humidity }}%</dd>
       <dt>High </dt>
@@ -35,7 +35,7 @@ export default {
   dt {
     float: left;
     clear: left;
-    width: 180px;
+    width: 120px;
     text-align: right;
     font-weight: bold;
     color: blue;

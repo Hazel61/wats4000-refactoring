@@ -9,9 +9,6 @@
       <weather-summary v-bind:weatherData="weatherData.weather"></weather-summary>
       <weather-conditions v-bind:conditions="weatherData.main"></weather-conditions>
     </div>
-    <div v-else>
-      <h2>Loading...</h2>
-    </div>
     <error-list v-bind:errorList="errors"></error-list>
   </div>
 </template>
@@ -48,7 +45,7 @@ export default {
   components: {
     'weather-summary': WeatherSummary,
     'weather-conditions': WeatherConditions, 
-    'error-list': ErrorList,
+    'error-list': ErrorList
   }
 }
 </script>
