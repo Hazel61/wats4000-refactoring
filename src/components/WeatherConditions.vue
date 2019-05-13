@@ -1,14 +1,16 @@
 <template>
   <div>
     <dl>
-      <dt>Current Temp</dt>
-      <dd>{{ conditions.temp }}</dd>
+      <dt v-if="conditions.temp !== conditions.temp_max">Current Temp</dt>
+      <dd v-if="conditions.temp !== conditions.temp_max">{{ conditions.temp }}&deg;F</dd>
+      <!-- <dt>Current Temp</dt> -->
+      <!-- <dd>{{ conditions.temp }}&deg;F</dd> -->
+      <dt>Expected High</dt>
+      <dd>{{ conditions.temp_max }}&deg;F</dd>
+      <dt>Expected Low </dt>
+      <dd>{{ conditions.temp_min }}&deg;F</dd>
       <dt>Humidity </dt>
       <dd>{{ conditions.humidity }}%</dd>
-      <dt>High </dt>
-      <dd>{{ conditions.temp_max }}&deg;F</dd>
-      <dt>Low </dt>
-      <dd>{{ conditions.temp_min }}&deg;F</dd>
     </dl>
   </div>
 </template>
